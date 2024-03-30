@@ -1,0 +1,20 @@
+1-SQL Injection:
+The code uses string formatting to construct SQL queries ('INSERT INTO expenses (category, amount) VALUES (?, ?)'). This approach is vulnerable to SQL injection attacks if the user input is not properly sanitized. An attacker could potentially manipulate the SQL query to perform malicious actions such as dropping tables or extracting sensitive data.
+Recommendation: Use parameterized queries or an ORM (Object-Relational Mapping) library like SQLAlchemy to properly sanitize user inputs and prevent SQL injection attacks.
+
+2-Cross-Site Scripting (XSS):
+The application renders HTML directly from user-supplied data in the expenses.html template ({{ expenses }}). This can lead to XSS vulnerabilities if the user input contains malicious scripts.
+Recommendation: Use template escaping or sanitize user inputs before rendering them in HTML to prevent XSS attacks. Flask provides built-in mechanisms for template escaping.
+
+3-Debug Mode Enabled:
+The application is running in debug mode (app.run(debug=True)). Debug mode should be disabled in production as it can expose sensitive information and introduce security risks.
+Recommendation: Set debug=False in the app.run() call when deploying the application to production.
+Additional Recommendations for Secure Coding Practices:
+
+Implement authentication and authorization mechanisms to control access to sensitive functionalities.
+Encrypt sensitive data (e.g., user credentials, financial information) both in transit and at rest.
+Validate and sanitize all user inputs to prevent injection attacks and other forms of malicious input.
+Regularly update dependencies and libraries to patch known security vulnerabilities.
+Enable logging and monitoring to detect and respond to security incidents in a timely manner.
+Conduct regular security assessments, including penetration testing and code reviews, to identify and address security weaknesses.
+By addressing these security vulnerabilities and following secure coding practices, the web-based expense tracker application can better protect user data and mitigate the risk of security breaches.
